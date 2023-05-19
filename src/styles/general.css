@@ -1,0 +1,52 @@
+
+body
+{
+ background-color: #e5e9ec;
+}
+
+hr{
+    border: #e5e9ec solid 0.5px;
+}
+
+.m-0{
+    margin: 0px !important;
+}
+
+.bg-icon{
+    font-size: 25px;
+    background-color: #f3f5f7;
+    color: #172939;
+}
+
+.text-primary{
+    color: #172939 !important;
+}
+.text-secundary{
+    color: #707c87 !important;
+    font-weight: 500 !important;
+}
+
+.ant-collapse-header{
+    padding: 5px !important;
+}
+
+.item-collapse{
+    border: none;
+    padding: 0px !important;
+}
+
+
+.bold{
+    font-weight: 500;
+}
+
+.mt-2 {
+    margin-top: 5px !important;
+}
+.mb-2 {
+    margin-bottom: 5px !important;
+}
+.custom-collapse{
+    border: none;
+    background-color: white
+}
