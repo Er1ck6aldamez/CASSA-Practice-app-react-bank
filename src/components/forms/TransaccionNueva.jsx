@@ -1,6 +1,6 @@
 import { CloseCircleFilled, SaveFilled } from '@ant-design/icons';
 import { Alert, Button, Form, Input, InputNumber, Select } from 'antd';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { conectionApi } from '../../api/ConnectionApi';
 import { ValueMin, Requered } from '../../helpers/FormRules';
 import { useSliceBankAccount } from '../../hooks/useSlice/useSliceBankAccount';
@@ -26,9 +26,8 @@ const tailLayout = {
 
 export const TransaccionNueva = () => {
   
-
-  const { lstBankAccount  } = useSliceBankAccount();
-  const { loading } = useSliceAplication();
+  const { lstBankAccount, lstTransferType, onGetTransferType } = useSliceBankAccount();
+  const { loading, onCloseModal } = useSliceAplication();
 
 
     const [showError, setshowError] = useState(true)
@@ -60,8 +59,17 @@ export const TransaccionNueva = () => {
     const onFinish = async (values) => {
         console.log(values);
         const response = await conectionApi.post("BankTransfers", values);
-        setErrorMessage(response.data.Message);
-        setshowError(response.data.State);
+        console.log(response);
+
+        if (response.data.State){
+          
+          setErrorMessage("Funciono");
+          onCloseModal();
+          setshowError(!response.data.State);
+        }else{
+          setErrorMessage(response.data.Message);
+          setshowError(response.data.State);
+        }
     };
     const onReset = () => {
       formRef.current?.resetFields();
@@ -75,7 +83,13 @@ export const TransaccionNueva = () => {
         Motivo:'Soy buena onda'
       });
     };
+  
+    useEffect(() => {
+      onGetTransferType('Transaccion');
+    }, [])
     
+
+
     return (
     <>
         {
@@ -98,7 +112,6 @@ export const TransaccionNueva = () => {
                     min={0}
                     presicion={2} />
             </Form.Item>
-
             <Form.Item
                 name="TransferType"
                 label="Tipo transacción"
@@ -108,9 +121,11 @@ export const TransaccionNueva = () => {
                 placeholder="Seleccione tipo de transacción"
                 onChange={onGenderChange}
                 allowClear >
-                <Option value="1">Terceros</Option>
-                <Option value="2">Abono</Option>
-                <Option value="3">Retiro</Option>
+                  {
+                    lstTransferType.map((item) => 
+                      <Option value={item.Id}>{ item.NameType }</Option>  
+                    )
+                  }
                 </Select>
             </Form.Item>
 

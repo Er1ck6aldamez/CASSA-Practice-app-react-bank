@@ -19,7 +19,7 @@ const { Text } = Typography;
 export const Dashboard = () => {
 
   const { lstBankAccount, onGetItemBankAccount, onGetLstBankAccount  } = useSliceBankAccount();
-  const { loading } = useSliceAplication();
+  const { loading, modalIsOpen } = useSliceAplication();
 
 
   const { columnsBankAccount, 
@@ -33,7 +33,8 @@ export const Dashboard = () => {
           //onGetBankAccount,
            } = useDashboard();
            
-  const { open,
+  const { 
+    //open,
     modalText,
     confirmLoading,
     
@@ -101,7 +102,7 @@ export const Dashboard = () => {
           </Button>
           <Modal
             title="Transferencia"
-            open={open}
+            open={modalIsOpen}
             onOk={handleOk}
             confirmLoading={confirmLoading}
             onCancel={handleCancel} >

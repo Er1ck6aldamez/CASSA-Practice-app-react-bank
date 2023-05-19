@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { GetLstBankAccount, GetItemBankAccount } from "../../store/uinterfaces/uiSliceBankAccount";
+import { GetLstBankAccount, GetItemBankAccount, GetLstTransferType } from "../../store/uinterfaces/uiSliceBankAccount";
 import { conectionApi } from "../../api/ConnectionApi";
 import { useSliceAplication } from "./useSliceAplication";
 
@@ -10,7 +10,6 @@ export const useSliceBankAccount = () => {
 
     const onGetLstBankAccount = async () => {
         try {
-            debugger
             dispatch(onLoading);
             const { data } = await conectionApi.get('BankAccount/');
             dispatch(GetLstBankAccount(data));
@@ -23,15 +22,31 @@ export const useSliceBankAccount = () => {
 
     const onGetItemBankAccount = async ( id ) => {
         try {
-            dispatch(onLoading());
+            dispatch(onLoading);
             const { data } = await conectionApi.get(`BankAccount/${id}`);
             dispatch(GetItemBankAccount(data));
-            dispatch(onLoadDone());
+            dispatch(onLoadDone);
         } catch (error) {
             dispatch(GetItemBankAccount(null));
-            dispatch(onLoadDone());
+            dispatch(onLoadDone);
         }
     }
     
-    return { ...propsBankAccount, onGetItemBankAccount, onGetLstBankAccount  }
+
+    const onGetTransferType = async ( clasification ) => {
+        /*  clasification
+                :Transaccion
+                :Cuenta         */
+        try {
+            dispatch(onLoading);
+            const { data } = await conectionApi.get(`TransferType/${clasification}`);
+            dispatch(GetLstTransferType(data.Data));
+            dispatch(onLoadDone);
+        } catch (error) {
+            dispatch(GetLstTransferType([]));
+            dispatch(onLoadDone);
+        }
+    }
+
+    return { ...propsBankAccount, onGetItemBankAccount, onGetLstBankAccount, onGetTransferType  }
 }

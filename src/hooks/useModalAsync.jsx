@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
 import { TransaccionNueva } from '../components/forms/TransaccionNueva';
+import { useSliceAplication } from './useSlice/useSliceAplication';
 
 
 
 export const useModalAsync = () => {
     
-    const [open, setOpen] = useState(false);
+  const { loading, onCloseModal, onOpenModal } = useSliceAplication();
+
+
+    //const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [modalText, setModalText] = useState(<></>);
     
     const showModal = (option) => {
       onSetContentModal(option);  
-      setOpen(true);
+      onOpenModal();
     };
 
     const onSetContentModal = (option) => {
@@ -37,18 +41,20 @@ export const useModalAsync = () => {
       setModalText('The modal will be closed after two seconds');
       setConfirmLoading(true);
       setTimeout(() => {
-        setOpen(false);
+// setOpen(false);
+        onCloseModal();
         setConfirmLoading(false);
       }, 2000);
     };
     const handleCancel = () => {
       console.log('Clicked cancel button');
-      setOpen(false);
+      // setOpen(false);
+      onCloseModal();
     };
   
   
     return {
-        open,
+        //open,
         modalText,
         confirmLoading,
         
