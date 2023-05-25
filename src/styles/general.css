@@ -50,3 +50,29 @@ hr{
     border: none;
     background-color: white
 }
+
+
+.icon-forms{
+    color: #508bd8;
+}
+.icon-form{
+    background-color: white;
+    padding: 10px; 
+    border-radius: 5px;
+}
+.center-elements{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+.titleText{
+    color: #4b4b4b !important;
+    margin-bottom: 0px !important;
+}
+.sub-title-text{
+    color: #797979 !important;
+    margin-bottom: 0px !important;
+}
+.secundaryText{
+    color: #a7a7a7;   
+}
