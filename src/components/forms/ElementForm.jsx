@@ -10,14 +10,15 @@ export const ElementForm = ({ customStyle, titleLabel, nameElement, rulesElement
         <div style={customStyle} className={'dividerBetweenElementes'} >
             <Form.Item style={{ margin: '0px' }} name={nameElement}
                 rules={rulesElement}>
-                <Row wrap={false}>
+                {/* <Row wrap={false}>
                     <Col flex="none">
                         <IconForm icon={icon} />
                     </Col>
                     <Col flex="auto" className='center-elements' style={{paddingLeft: '5px'}}>
                         {children}
                     </Col>
-                </Row>  
+                </Row>   */}
+                {children}
             </Form.Item>
         </div>
     </>
